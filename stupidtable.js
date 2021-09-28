@@ -184,29 +184,30 @@
         return get_th(sort_info.$table, identifier);
     });
 
+    var dirMult = sort_info.sort_dir != $.fn.stupidtable.dir.ASC ? -1 : 1;
+
     table_structure.sort(function(e1, e2){
-      var multicolumns = multicolumn_th_targets.slice(0); // shallow copy
       var diff = sort_info.compare_fn(e1.columns[th_index], e2.columns[th_index]);
-      while(diff === 0 && multicolumns.length){
-          var multicolumn = multicolumns[0];
-          var datatype = multicolumn.$e.data("sort");
-          var multiCloumnSortMethod = sort_info.$table.data('sortFns')[datatype];
-          diff = multiCloumnSortMethod(e1.columns[multicolumn.index], e2.columns[multicolumn.index]);
-          multicolumns.shift();
+      if (diff === 0) {
+        var multicolumns = multicolumn_th_targets.slice(0); // shallow copy
+        while(diff === 0 && multicolumns.length){
+            var multicolumn = multicolumns[0];
+            var datatype = multicolumn.$e.data("sort");
+            var multiCloumnSortMethod = sort_info.$table.data('sortFns')[datatype];
+            diff = multiCloumnSortMethod(e1.columns[multicolumn.index], e2.columns[multicolumn.index]);
+            multicolumns.shift();
+        }
       }
       // Sort by position in the table if values are the same. This enforces a
       // stable sort across all browsers. See https://bugs.chromium.org/p/v8/issues/detail?id=90
       if (diff === 0)
-        return e1.index - e2.index;
+        return dirMult * (e1.index - e2.index);
       else
-        return diff;
+        return dirMult * diff;
 
     });
 
-    if (sort_info.sort_dir != $.fn.stupidtable.dir.ASC){
-      table_structure.reverse();
-    }
-      return table_structure;
+    return table_structure;
   };
 
   var get_th = function($table, identifier){
