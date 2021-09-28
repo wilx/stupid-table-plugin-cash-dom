@@ -135,30 +135,35 @@
       var $table = $(this);
       var table_structure = [];
       var trs = $table.children("tbody").children("tr");
-      trs.each(function(index,tr) {
+      var table_structure = new Array(trs.length);
+      console.log(`trs.lenght: ${trs.length}`);
+      trs.each(function(index,tr_) {
+        var tr = $(tr_);
 
         // ====================================================================
         // Transfer to using internal table structure
         // ====================================================================
+        var children = tr.children('td');
         var ele = {
-            $tr: $(tr),
-            columns: [],
-            index: index
+          $tr: tr,
+          columns: new Array(children.length),
+          index: index
         };
 
-        $(tr).children('td').each(function(idx, td){
-            var sort_val = $(td).data("sort-value");
+        children.each(function(idx, td_){
+            var td = $(td_);
+            var sort_val = td.data("sort-value");
 
             // Store and read from the .data cache for display text only sorts
             // instead of looking through the DOM every time
             if(typeof(sort_val) === "undefined"){
-              var txt = $(td).text();
-              $(td).data('sort-value', txt);
+              var txt = td.text();
+              td.data('sort-value', txt);
               sort_val = txt;
             }
-            ele.columns.push(sort_val);
+            ele.columns[idx] = sort_val;
         });
-        table_structure.push(ele);
+        table_structure[index] = ele;
       });
       $table.data('stupidsort_internaltable', table_structure);
     });
