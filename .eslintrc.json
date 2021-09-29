@@ -1,0 +1,21 @@
+{
+  "env": {
+    "browser": true,
+    "es2020": true
+  },
+  "extends": [
+    "standard",
+    "eslint:recommended"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 11,
+    "sourceType": "module"
+  },
+  "rules": {
+    "no-unused-vars": ["error", {"args": "none"}],
+    "semi": [2, "always"],
+    "indent": ["error", 4],
+    "operator-linebreak": ["error", "before"],
+    "camelcase": 0
+  }
+}

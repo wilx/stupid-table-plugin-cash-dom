@@ -1,0 +1,9 @@
+{
+    "eslint.format.enable": true,
+    "eslint.alwaysShowStatus": true,
+    "eslint.packageManager": "yarn",
+    "eslint.workingDirectories": [
+        "./src",
+        "."
+    ]
+}

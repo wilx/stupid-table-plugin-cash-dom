@@ -1,37 +1,60 @@
 {
-  "name": "stupid-table-plugin",
-  "version": "1.1.3",
-  "description": "Stupidly simple jquery table sorting plugin",
-  "main": "stupidtable.js",
+  "name": "stupid-table-plugin-cash-dom",
+  "version": "1.1.25",
+  "description": "Stupidly simple cash-dom table sorting plugin",
+  "main": "./dist/stupidtable.js",
   "scripts": {
-    "lint": "eslint stupidtable.js",
-    "build": "minify stupidtable.js > stupidtable.min.js"
+    "build": "yarn version -i patch && yarn eslint src/** && yarn webpack",
+    "audit-html": "yarn npm audit --recursive --json | npm-audit-html -o -o output/stupid-table-plugin-cash-dom.audit.html"
   },
   "directories": {
     "example": "examples",
-    "test": "tests"
+    "test": "tests",
+    "src": "src",
+    "dist": "dist"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/joequery/Stupid-Table-Plugin.git"
-  },
+  "repository": "git@github.com:wilx/stupid-table-plugin-cash-dom.git",
   "devDependencies": {
-    "eslint": "4.18.2",
-    "minify": "^3.0.5"
+    "@babel/core": "^7.15.5",
+    "@babel/eslint-parser": "^7.15.7",
+    "@babel/preset-env": "^7.15.6",
+    "babel-loader": "^8.2.2",
+    "babel-plugin-minify-dead-code-elimination": "^0.5.1",
+    "babel-plugin-minify-guarded-expressions": "^0.4.4",
+    "babel-plugin-transform-remove-undefined": "^0.5.0",
+    "babel-plugin-transform-simplify-comparison-operators": "^6.9.4",
+    "browserslist": "^4.17.1",
+    "core-js": "^3.18.1",
+    "eslint": "^7.32.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.1.0",
+    "jsdoc-webpack-plugin": "^0.3.0",
+    "minify": "^7.2.1",
+    "npm-audit-html": "^1.5.0",
+    "webpack": "^5.55.1",
+    "webpack-cli": "^4.8.0"
   },
-  "peerDependencies": {
-    "jquery": ">= 1.7.0"
+  "dependencies": {
+    "cash-dom": "^8.1.0"
+  },
+  "browserslist": {
+    "production": [
+      "> 1%",
+      "not dead"
+    ]
   },
   "keywords": [
     "table",
     "sort",
-    "jquery"
+    "cash-dom"
   ],
   "author": "JoeQuery",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/joequery/Stupid-Table-Plugin/issues"
+    "url": "https://github.com/wilx/stupid-table-plugin-cash-dom/issues"
   },
-  "homepage": "https://github.com/joequery/Stupid-Table-Plugin#readme",
-  "dependencies": {}
+  "homepage": "https://github.com/wilx/stupid-table-plugin-cash-dom",
+  "packageManager": "yarn@3.0.2"
 }
